@@ -21,6 +21,11 @@ agent; right-click it to choose which Pokémon it is.
   (`#00000030`, 6 px tall, 70 % of the sprite's visible width) under its feet.
   The sprite is aligned by its visible pixels: feet on the ground, body
   centered on the column.
+- **Configurable size**: set `content.props.scale` to a positive finite number
+  (default `1`) to multiply the displayed sprite, shadow and loading Poké Ball
+  sizes. Feet stay on the ground and bubbles follow the scaled head height.
+  Name tags and picker icons keep their size. Missing or invalid values use
+  `1`; increase the block height for larger Pokémon.
 - **A name tag** under each Pokémon, 10.5 px text in `muted` (`foreground`
   when hovered or focused), preceded by a 6 px dot in the agent's status color
   (`theme().working | blocked | done | idle`). The tag is the tab's name when

@@ -21,6 +21,21 @@ Then put a `{ "type": "block", "content": { "mod": "pokemon-agents" }, "size": {
 at the bottom of your layout's main column (see [RECIPE.md](RECIPE.md)).
 Optional key: merge [keys.json](keys.json) (`alt-shift-p` opens the picker).
 
+Set `content.props.scale` to a positive number to resize the Pokémon relative
+to their current size (`1` by default, `0.5` for half size, `2` for double):
+
+```json
+{
+  "type": "block",
+  "content": { "mod": "pokemon-agents", "props": { "scale": 1.5 } },
+  "size": { "px": 160 }
+}
+```
+
+Shadows and loading Poké Balls scale with the sprites; name tags and picker
+icons keep their size. Missing or invalid scales fall back to `1`. Increase
+the block height when enlarging Pokémon to leave room above their heads.
+
 Needs `curl` and [ImageMagick](https://imagemagick.org) on PATH.
 
 ## What it reaches

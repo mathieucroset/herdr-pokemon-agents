@@ -220,6 +220,8 @@ export default class PokemonAgents extends View {
 
   renderStrip(cx) {
     const t = theme();
+    const configuredScale = props()?.scale;
+    const scale = Number.isFinite(configuredScale) && configuredScale > 0 ? configuredScale : 1;
     const now = Date.now();
     const list = agents();
     const tabs = tabsById();
@@ -285,22 +287,22 @@ export default class PokemonAgents extends View {
       const x = m.moving ? m.target : m.x;
 
       let body;
-      let headY = ground - 40;
+      let headY = ground - 40 * scale;
       if (meta && meta.walkR) {
         const s = mood === "sleep" ? meta.sleep
           : m.moving ? (m.dir === "r" ? meta.walkR : meta.walkL)
           : (m.dir === "r" ? meta.idleR : meta.idleL);
         // Stand the sprite's visible feet on the ground line, centered on its visible body.
-        const left = SLOT / 2 - (s.box.x + s.box.w / 2);
-        const top = ground - (s.box.y + s.box.h);
-        headY = ground - s.box.h;
-        const shadowW = Math.max(14, Math.round(s.box.w * 0.7));
+        const left = SLOT / 2 - (s.box.x + s.box.w / 2) * scale;
+        const top = ground - (s.box.y + s.box.h) * scale;
+        headY = ground - s.box.h * scale;
+        const shadowW = Math.max(14, Math.round(s.box.w * 0.7)) * scale;
         body = div()
-          .child(div().absolute().left(SLOT / 2 - shadowW / 2).top(ground - 2).w(shadowW).h(6).rounded_full().bg("#00000030"))
-          .child(image(s.path).absolute().left(left).top(top).w(s.w).h(s.h));
+          .child(div().absolute().left(SLOT / 2 - shadowW / 2).top(ground - 2 * scale).w(shadowW).h(6 * scale).rounded_full().bg("#00000030"))
+          .child(image(s.path).absolute().left(left).top(top).w(s.w * scale).h(s.h * scale));
       } else {
         // Loading (or no ImageMagick): a little Poké Ball waits in its place.
-        const r = 9;
+        const r = 9 * scale;
         headY = ground - 2 * r;
         body = div()
           .absolute().left(SLOT / 2 - r).top(ground - 2 * r).size(2 * r)
@@ -308,7 +310,7 @@ export default class PokemonAgents extends View {
           .when(meta === "loading" || meta === undefined, (el) => el.loop("opacity", { from: 0.35, to: 1, period: 1200 }))
           .child(div().absolute().left(0).top(0).w(2 * r).h(r).bg("#e3350d"))
           .child(div().absolute().left(0).top(r).w(2 * r).h(r).bg("#f4f4f4"))
-          .child(div().absolute().left(r - 3).top(r - 3).size(6).rounded_full().bg("#f4f4f4").border_1().border_color(t.foreground));
+          .child(div().absolute().left(r - 3 * scale).top(r - 3 * scale).size(6 * scale).rounded_full().bg("#f4f4f4").border_1().border_color(t.foreground));
       }
 
       const bubble =
