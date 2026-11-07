@@ -1,5 +1,16 @@
 # Changelog
 
+## v0.2.0 (2026-11-07)
+
+### Added
+- A `scale` prop resizes the Pokémon: set `content.props.scale` on the strip
+  block (`1` by default, `0.5` for half size, `2` for double). Shadows and
+  loading Poké Balls scale with the sprites, while name tags and picker icons
+  keep their size. Give the block more height when you enlarge the Pokémon so
+  their heads fit ([#2](https://github.com/mathieucroset/herdr-pokemon-agents/pull/2)).
+
+Thanks to [@gymynnym](https://github.com/gymynnym) for the feature.
+
 ## v0.1.2 (2026-11-05)
 
 ### Fixed
